@@ -1,0 +1,24 @@
+from pathlib import Path
+
+from extract_emails import DefaultFilterAndEmailFactory as Factory
+from extract_emails import DefaultWorker
+from extract_emails.browsers.requests_browser import RequestsBrowser as Browser
+from extract_emails.data_savers import CsvSaver
+
+
+websites = ["https://stores.medkart.in/medkart-pharmacy-shahibaug-ahmedabad-11342333/home",
+"https://stores.medkart.in/medkart-pharmacy-bavlanavrangpura-navrangpura-ahmedabad-11342329/home",
+"https://irmgroup.co.in/"
+]
+
+
+browser = Browser()
+data_saver = CsvSaver(save_mode="a", output_path=Path("output.csv"))
+
+for website in websites:
+    factory = Factory(
+        website_url=website, browser=browser, depth=5, max_links_from_page=1
+    )
+    worker = DefaultWorker(factory)
+    data = worker.get_data()
+    data_saver.save(data)

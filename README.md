@@ -1,7 +1,6 @@
-# Email Scraper
+**Note - Scraping is only limited to publicly available data. Please do not scrape any privatised information.
 
-Extract emails and linkedins profiles from a given website
-
+Another scraper for extracting emails from a list of websites
 
 ## Requirements
 - Python >= 3.9
